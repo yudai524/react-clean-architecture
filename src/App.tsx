@@ -1,6 +1,6 @@
 import { ColorSchemeProvider, MantineProvider } from "@mantine/core";
 import { useThemeSwitcher } from "@/utils/viewHelpers";
-import AppContent from "@/components/AppContent";
+import { AppContent } from "@/components/AppContent";
 
 export default function App() {
   const { colorScheme, toggleColorScheme } = useThemeSwitcher();

@@ -1,4 +1,5 @@
 const symbols = {
+  ICreateDraftTodoUseCase: Symbol.for('ICreateDraftTodoUseCase'),
   IHandleErrorUseCase: Symbol.for('IHandleErrorUseCase'),
   IToggleTodoCompletionUseCase: Symbol.for('IToggleTodoCompletionUseCase'),
   IDeleteTodoUseCase: Symbol.for('IDeleteTodoUseCase'),

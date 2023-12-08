@@ -1,4 +1,4 @@
-import { action, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 import { inject, injectable } from "inversify";
 import * as types from "@core/types";
 import symbols from "@core/symbols";
@@ -24,8 +24,18 @@ export default class TodoStore implements types.ITodoStore {
     return output;
   }
 
+  // TODO: Use decorator
+  constructor() {
+    makeObservable(this);
+  }
+
   @action
   _addTodoLists(lists: types.ITodoListVM[]): void {
-    this.lists = this.lists.concat(lists);
+    const newLists = lists.filter((newList) => {
+      const isDuplicate = this.lists.some((list) => list.id === newList.id);
+      return !isDuplicate;
+    });
+
+    this.lists = this.lists.concat(newLists);
   }
 }

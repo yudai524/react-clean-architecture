@@ -1,6 +1,6 @@
 fragment todoListField on TodoList {
   id
-  name
+  title
   createdAt
   updatedAt
   list {

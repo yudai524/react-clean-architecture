@@ -78,13 +78,15 @@ export type Todo = {
   completedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
   createdAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
   id: Scalars['ID']['output'];
-  name?: Maybe<Scalars['String']['output']>;
+  summary?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
 };
 
 export type TodoInput = {
   completedAt?: InputMaybe<Scalars['ISO8601DateTime']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type TodoList = {
@@ -92,7 +94,7 @@ export type TodoList = {
   createdAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
   id: Scalars['ID']['output'];
   list?: Maybe<Array<Todo>>;
-  name?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
 };
 
@@ -120,30 +122,30 @@ export type UpdateTodoRequestInput = {
   id: Scalars['ID']['input'];
 };
 
-export type TodoFieldFragment = { __typename?: 'Todo', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null };
+export type TodoFieldFragment = { __typename?: 'Todo', id: string, title?: string | null, summary?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null };
 
-export type TodoListFieldFragment = { __typename?: 'TodoList', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, list?: Array<{ __typename?: 'Todo', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null }> | null };
+export type TodoListFieldFragment = { __typename?: 'TodoList', id: string, title?: string | null, createdAt?: string | null, updatedAt?: string | null, list?: Array<{ __typename?: 'Todo', id: string, title?: string | null, summary?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null }> | null };
 
 export type CreateTodoMutationVariables = Exact<{
   input: CreateTodoRequestInput;
 }>;
 
 
-export type CreateTodoMutation = { __typename?: 'Mutation', createTodo?: { __typename?: 'Todo', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null } | null };
+export type CreateTodoMutation = { __typename?: 'Mutation', createTodo?: { __typename?: 'Todo', id: string, title?: string | null, summary?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null } | null };
 
 export type DeleteTodoMutationVariables = Exact<{
   input: DeleteTodoRequestInput;
 }>;
 
 
-export type DeleteTodoMutation = { __typename?: 'Mutation', deleteTodo?: { __typename?: 'Todo', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null } | null };
+export type DeleteTodoMutation = { __typename?: 'Mutation', deleteTodo?: { __typename?: 'Todo', id: string, title?: string | null, summary?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null } | null };
 
 export type UpdateTodoMutationVariables = Exact<{
   input: UpdateTodoRequestInput;
 }>;
 
 
-export type UpdateTodoMutation = { __typename?: 'Mutation', updateTodo?: { __typename?: 'Todo', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null } | null };
+export type UpdateTodoMutation = { __typename?: 'Mutation', updateTodo?: { __typename?: 'Todo', id: string, title?: string | null, summary?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null } | null };
 
 export type FetchTodoListsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']['input']>;
@@ -153,7 +155,7 @@ export type FetchTodoListsQueryVariables = Exact<{
 }>;
 
 
-export type FetchTodoListsQuery = { __typename?: 'Query', todoLists: { __typename?: 'TodoListConnection', nodes?: Array<{ __typename?: 'TodoList', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, list?: Array<{ __typename?: 'Todo', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null } } };
+export type FetchTodoListsQuery = { __typename?: 'Query', todoLists: { __typename?: 'TodoListConnection', nodes?: Array<{ __typename?: 'TodoList', id: string, title?: string | null, createdAt?: string | null, updatedAt?: string | null, list?: Array<{ __typename?: 'Todo', id: string, title?: string | null, summary?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null } } };
 
 
 /**
@@ -267,7 +269,8 @@ export const mockTodo = (overrides?: Partial<Todo>): Todo => {
         completedAt: overrides && overrides.hasOwnProperty('completedAt') ? overrides.completedAt! : '1978-12-29T03:17:48+09:00',
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : '1975-01-24T01:06:32+09:00',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'bcbfc1fd-9f84-4ca5-804f-62522ce5ea92',
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'Qui amet',
+        summary: overrides && overrides.hasOwnProperty('summary') ? overrides.summary! : 'Eaque voluptatem necessitatibus et quos repellendus et distinctio. Dignissimos nihil ad inventore necessitatibus perferendis tempore. Vel dolor aut ut. Et excepturi voluptatem rerum molestias quod unde. Est asperiores omnis est sed illo.',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'Qui quae',
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : '2001-01-11T10:48:27+09:00',
     };
 };
@@ -275,7 +278,8 @@ export const mockTodo = (overrides?: Partial<Todo>): Todo => {
 export const mockTodoInput = (overrides?: Partial<TodoInput>): TodoInput => {
     return {
         completedAt: overrides && overrides.hasOwnProperty('completedAt') ? overrides.completedAt! : '2014-12-03T04:29:33+09:00',
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'qui',
+        summary: overrides && overrides.hasOwnProperty('summary') ? overrides.summary! : 'nulla',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'nesciunt',
     };
 };
 
@@ -284,7 +288,7 @@ export const mockTodoList = (overrides?: Partial<TodoList>): TodoList => {
         createdAt: overrides && overrides.hasOwnProperty('createdAt') ? overrides.createdAt! : '1987-11-03T20:23:55+09:00',
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '84df6730-6e26-4870-8e0a-bd02db0f3fcb',
         list: overrides && overrides.hasOwnProperty('list') ? overrides.list! : [mockTodo()],
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'Est quisquam',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'Officia quia',
         updatedAt: overrides && overrides.hasOwnProperty('updatedAt') ? overrides.updatedAt! : '2008-03-28T12:40:43+09:00',
     };
 };

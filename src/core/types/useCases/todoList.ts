@@ -1,6 +1,6 @@
-import { IUseCaseOutput, TodoInput } from '@core/types/entities'
+import { IUseCaseOutput, Todo, TodoInput } from '@core/types/entities'
 import { FetchTodoListsRequestInput } from '@core/types/services'
-import { ITodoListVM, ITodoVM } from '@core/types/entityVMs'
+import { ITodoListVM, ITodoVM, ITodoVMCallBacks } from '@core/types/entityVMs'
 
 // ============================================================
 // FetchTodoListsUseCase
@@ -68,4 +68,20 @@ export type ToggleTodoCompletionUseCaseOutput = IUseCaseOutput<ToggleTodoComplet
 
 export interface IToggleTodoCompletionUseCase {
   handle(input: ToggleTodoCompletionUseCaseInput): Promise<ToggleTodoCompletionUseCaseOutput>
+}
+
+// ============================================================
+// CreateDraftTodoUseCase
+// ============================================================
+export type CreateDraftTodoUseCaseInput = {
+  callbacks: ITodoVMCallBacks
+  entity?: Todo
+}
+export type CreateDraftTodoUseCaseOutputBase = {
+  todoVM: ITodoVM
+}
+export type CreateDraftTodoUseCaseOutput = IUseCaseOutput<CreateDraftTodoUseCaseOutputBase>
+
+export interface ICreateDraftTodoUseCase {
+  handle(input: CreateDraftTodoUseCaseInput): Promise<CreateDraftTodoUseCaseOutput>
 }

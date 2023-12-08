@@ -19,9 +19,10 @@ generates:
               arguments: 'YYYY-MM-DDTHH:mm:ssZ'
           fieldGeneration:
             TodoList:
-              name: title
+              title: title
             Todo:
-              name: title
+              title: title
+              summary: text
 config:
   scalars:
     BigInt: string

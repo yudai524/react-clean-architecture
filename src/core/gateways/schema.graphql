@@ -53,7 +53,7 @@ type TodoListConnection {
 
 type TodoList {
   id: ID!
-  name: String
+  title: String
   createdAt: ISO8601DateTime
   updatedAt: ISO8601DateTime
   list: [Todo!]
@@ -61,14 +61,16 @@ type TodoList {
 
 type Todo {
   id: ID!
-  name: String
+  title: String
+  summary: String
   createdAt: ISO8601DateTime
   updatedAt: ISO8601DateTime
   completedAt: ISO8601DateTime
 }
 
 input TodoInput {
-  name: String
+  title: String
+  summary: String
   completedAt: ISO8601DateTime
 }
 

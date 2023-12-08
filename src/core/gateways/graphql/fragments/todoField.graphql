@@ -1,6 +1,7 @@
 fragment todoField on Todo {
   id
-  name
+  title
+  summary
   createdAt
   updatedAt
   completedAt

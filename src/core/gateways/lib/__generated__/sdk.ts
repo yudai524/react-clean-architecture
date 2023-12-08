@@ -80,13 +80,15 @@ export type Todo = {
   completedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
   createdAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
   id: Scalars['ID']['output'];
-  name?: Maybe<Scalars['String']['output']>;
+  summary?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
 };
 
 export type TodoInput = {
   completedAt?: InputMaybe<Scalars['ISO8601DateTime']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
+  summary?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type TodoList = {
@@ -94,7 +96,7 @@ export type TodoList = {
   createdAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
   id: Scalars['ID']['output'];
   list?: Maybe<Array<Todo>>;
-  name?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
 };
 
@@ -122,30 +124,30 @@ export type UpdateTodoRequestInput = {
   id: Scalars['ID']['input'];
 };
 
-export type TodoFieldFragment = { __typename?: 'Todo', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null };
+export type TodoFieldFragment = { __typename?: 'Todo', id: string, title?: string | null, summary?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null };
 
-export type TodoListFieldFragment = { __typename?: 'TodoList', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, list?: Array<{ __typename?: 'Todo', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null }> | null };
+export type TodoListFieldFragment = { __typename?: 'TodoList', id: string, title?: string | null, createdAt?: string | null, updatedAt?: string | null, list?: Array<{ __typename?: 'Todo', id: string, title?: string | null, summary?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null }> | null };
 
 export type CreateTodoMutationVariables = Exact<{
   input: CreateTodoRequestInput;
 }>;
 
 
-export type CreateTodoMutation = { __typename?: 'Mutation', createTodo?: { __typename?: 'Todo', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null } | null };
+export type CreateTodoMutation = { __typename?: 'Mutation', createTodo?: { __typename?: 'Todo', id: string, title?: string | null, summary?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null } | null };
 
 export type DeleteTodoMutationVariables = Exact<{
   input: DeleteTodoRequestInput;
 }>;
 
 
-export type DeleteTodoMutation = { __typename?: 'Mutation', deleteTodo?: { __typename?: 'Todo', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null } | null };
+export type DeleteTodoMutation = { __typename?: 'Mutation', deleteTodo?: { __typename?: 'Todo', id: string, title?: string | null, summary?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null } | null };
 
 export type UpdateTodoMutationVariables = Exact<{
   input: UpdateTodoRequestInput;
 }>;
 
 
-export type UpdateTodoMutation = { __typename?: 'Mutation', updateTodo?: { __typename?: 'Todo', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null } | null };
+export type UpdateTodoMutation = { __typename?: 'Mutation', updateTodo?: { __typename?: 'Todo', id: string, title?: string | null, summary?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null } | null };
 
 export type FetchTodoListsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']['input']>;
@@ -155,12 +157,13 @@ export type FetchTodoListsQueryVariables = Exact<{
 }>;
 
 
-export type FetchTodoListsQuery = { __typename?: 'Query', todoLists: { __typename?: 'TodoListConnection', nodes?: Array<{ __typename?: 'TodoList', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, list?: Array<{ __typename?: 'Todo', id: string, name?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null } } };
+export type FetchTodoListsQuery = { __typename?: 'Query', todoLists: { __typename?: 'TodoListConnection', nodes?: Array<{ __typename?: 'TodoList', id: string, title?: string | null, createdAt?: string | null, updatedAt?: string | null, list?: Array<{ __typename?: 'Todo', id: string, title?: string | null, summary?: string | null, createdAt?: string | null, updatedAt?: string | null, completedAt?: string | null }> | null } | null> | null, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null } } };
 
 export const TodoFieldFragmentDoc = gql`
     fragment todoField on Todo {
   id
-  name
+  title
+  summary
   createdAt
   updatedAt
   completedAt
@@ -169,7 +172,7 @@ export const TodoFieldFragmentDoc = gql`
 export const TodoListFieldFragmentDoc = gql`
     fragment todoListField on TodoList {
   id
-  name
+  title
   createdAt
   updatedAt
   list {

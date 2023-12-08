@@ -7,8 +7,20 @@ import symbols from '@core/symbols'
 export default class TodoListVMFactory implements types.ITodoListVMFactory {
   @inject(symbols.ITodoVMFactory) private todoVMFactory: types.ITodoVMFactory
 
+  @inject(symbols.ICreateDraftTodoUseCase) public createDraftTodoUseCase: types.ICreateDraftTodoUseCase
+
   public create(input: types.TodoListVMFactoryInput): types.ITodoListVM {
-    const list = input.entity.list.map(item => this.todoVMFactory.create({ entity: item }))
-    return new TodoListVM(input.entity, { list })
+    const todoList = new TodoListVM(input.entity, { list: [], createDraftTodoUseCase: this.createDraftTodoUseCase })
+    const list = input.entity.list.map((item) =>
+      this.todoVMFactory.create({
+        entity: item,
+        callbacks: {
+          onDelete: todoList.onDeleteTodo,
+          onCreate: todoList.onCreateTodo,
+        },
+      })
+    )
+    todoList.setList(list)
+    return todoList
   }
 }

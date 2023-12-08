@@ -12,6 +12,7 @@ import { ITodoListVMFactory, ITodoVMFactory } from '@core/types/factories/entity
 import TodoListVMFactory from '@core/factories/entityVMs/TodoListVMFactory'
 import TodoVMFactory from '@core/factories/entityVMs/TodoVMFactory'
 import {
+  ICreateDraftTodoUseCase,
   ICreateTodoUseCase,
   IDeleteTodoUseCase,
   IFetchTodoListsUseCase,
@@ -25,6 +26,7 @@ import UpdateTodoInteractor from '@core/useCases/TodoList/UpdateTodoInteractor'
 import DeleteTodoInteractor from '@core/useCases/TodoList/DeleteTodoInteractor'
 import ToggleTodoCompletionInteractor from '@core/useCases/TodoList/ToggleTodoCompletionInteractor'
 import HandleErrorInteractor from '@core/useCases/Errors/HandleErrorInteractor'
+import CreateDraftTodoInteractor from '@core/useCases/TodoList/CreateDraftTodoInteractor'
 
 const container = new Container({ defaultScope: 'Singleton' })
 
@@ -42,6 +44,10 @@ container.bind<IDeleteTodoUseCase>(symbols.IDeleteTodoUseCase).to(DeleteTodoInte
 container
   .bind<IToggleTodoCompletionUseCase>(symbols.IToggleTodoCompletionUseCase)
   .to(ToggleTodoCompletionInteractor)
+  .inSingletonScope()
+container
+  .bind<ICreateDraftTodoUseCase>(symbols.ICreateDraftTodoUseCase)
+  .to(CreateDraftTodoInteractor)
   .inSingletonScope()
 
 export { container }
