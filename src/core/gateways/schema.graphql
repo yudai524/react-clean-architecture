@@ -1,3 +1,5 @@
+scalar ISO8601DateTime
+
 type PageInfo {
   """
   When paginating forwards, the cursor to continue.
@@ -52,22 +54,22 @@ type TodoListConnection {
 type TodoList {
   id: ID!
   name: String
-  createdAt: String
-  updatedAt: String
+  createdAt: ISO8601DateTime
+  updatedAt: ISO8601DateTime
   list: [Todo!]
 }
 
 type Todo {
   id: ID!
   name: String
-  createdAt: String
-  updatedAt: String
-  completedAt: String
+  createdAt: ISO8601DateTime
+  updatedAt: ISO8601DateTime
+  completedAt: ISO8601DateTime
 }
 
 input TodoInput {
   name: String
-  completedAt: String
+  completedAt: ISO8601DateTime
 }
 
 input CreateTodoRequestInput {

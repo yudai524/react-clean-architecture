@@ -1,13 +1,15 @@
-import { Container, Text } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { Container, Text } from "@mantine/core";
 import AppHeader from "@/components/AppHeader";
 import TaskModal from "@/components/TaskModal";
 import TaskCard from "@/components/TaskCard";
 import AppFooter from "@/components/AppFooter";
+import { useStores } from "@/hooks";
 
 export default function AppContent() {
   const [tasks, setTasks] = useState([]);
   const [opened, setOpened] = useState(false);
+  const { todoStore } = useStores();
 
   function createTask(title: string, summary: string) {
     setTasks([
@@ -53,6 +55,7 @@ export default function AppContent() {
 
   useEffect(() => {
     loadTasks();
+    todoStore.fetchTodoLists({ limit: 10 });
   }, []);
 
   return (

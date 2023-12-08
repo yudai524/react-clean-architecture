@@ -1,11 +1,27 @@
 schema: src/core/gateways/schema.graphql
 documents: src/core/gateways/graphql/**/*.graphql
 generates:
-  src/core/gateways/lib/generated/sdk.ts:
+  src/core/gateways/lib/__generated__/sdk.ts:
     plugins:
-      - "@graphql-codegen/typescript"
-      - "@graphql-codegen/typescript-operations"
-      - "@graphql-codegen/typescript-graphql-request"
+      - '@graphql-codegen/typescript'
+      - '@graphql-codegen/typescript-operations'
+      - '@graphql-codegen/typescript-graphql-request'
+  'src/mocks/__generated__/mockHandlers.ts':
+    plugins:
+      - '@graphql-codegen/typescript'
+      - '@graphql-codegen/typescript-operations'
+      - '@graphql-codegen/typescript-msw'
+      - typescript-mock-data:
+          prefix: 'mock'
+          scalars:
+            ISO8601DateTime:
+              generator: date
+              arguments: 'YYYY-MM-DDTHH:mm:ssZ'
+          fieldGeneration:
+            TodoList:
+              name: title
+            Todo:
+              name: title
 config:
   scalars:
     BigInt: string

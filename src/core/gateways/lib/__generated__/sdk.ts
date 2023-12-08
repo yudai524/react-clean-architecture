@@ -15,6 +15,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  ISO8601DateTime: { input: string; output: string; }
 };
 
 export type CreateTodoRequestInput = {
@@ -76,25 +77,25 @@ export type QueryTodoListsArgs = {
 
 export type Todo = {
   __typename?: 'Todo';
-  completedAt?: Maybe<Scalars['String']['output']>;
-  createdAt?: Maybe<Scalars['String']['output']>;
+  completedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  createdAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
   id: Scalars['ID']['output'];
   name?: Maybe<Scalars['String']['output']>;
-  updatedAt?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
 };
 
 export type TodoInput = {
-  completedAt?: InputMaybe<Scalars['String']['input']>;
+  completedAt?: InputMaybe<Scalars['ISO8601DateTime']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type TodoList = {
   __typename?: 'TodoList';
-  createdAt?: Maybe<Scalars['String']['output']>;
+  createdAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
   id: Scalars['ID']['output'];
   list?: Maybe<Array<Todo>>;
   name?: Maybe<Scalars['String']['output']>;
-  updatedAt?: Maybe<Scalars['String']['output']>;
+  updatedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
 };
 
 export type TodoListConnection = {

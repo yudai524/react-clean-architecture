@@ -9,7 +9,7 @@ import {
   FetchTodoListsRequestOutput,
   ITodoListService,
 } from "@core/types";
-import { getSdk } from "./lib/generated/sdk";
+import { getSdk } from "./lib/__generated__/sdk";
 
 @injectable()
 export default class AppGraphQLAPIGateway implements ITodoListService {
@@ -18,8 +18,8 @@ export default class AppGraphQLAPIGateway implements ITodoListService {
   private _fetchTodoListsCursors: Record<string, string> = {};
 
   constructor() {
-    // const url = `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/graphql`
-    const url = "https://example.com/graphql";
+    // const url = `${YOUR_BACKEND_BASE_URL}/graphql`
+    const url = "http://localhost:3000/graphql";
     const client = new GraphQLClient(url);
     this.sdk = getSdk(client);
   }
