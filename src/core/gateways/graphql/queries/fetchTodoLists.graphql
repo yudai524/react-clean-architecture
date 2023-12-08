@@ -1,0 +1,13 @@
+query fetchTodoLists ($after: String, $before: String, $first: Int, $last: Int) {
+  todoLists (after: $after, before: $before, first: $first, last: $last) {
+    nodes {
+      ...todoListField
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+  }
+}

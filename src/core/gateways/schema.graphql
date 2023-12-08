@@ -1,0 +1,102 @@
+type PageInfo {
+  """
+  When paginating forwards, the cursor to continue.
+  """
+  endCursor: String
+
+  """
+  When paginating forwards, are there more items?
+  """
+  hasNextPage: Boolean!
+
+  """
+  When paginating backwards, are there more items?
+  """
+  hasPreviousPage: Boolean!
+
+  """
+  When paginating backwards, the cursor to continue.
+  """
+  startCursor: String
+}
+
+type TodoListEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+
+  """
+  The item at the end of the edge.
+  """
+  node: TodoList
+}
+
+type TodoListConnection {
+  """
+  A list of edges.
+  """
+  edges: [TodoListEdge]
+
+  """
+  A list of nodes.
+  """
+  nodes: [TodoList]
+
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+}
+
+type TodoList {
+  id: ID!
+  name: String
+  createdAt: String
+  updatedAt: String
+  list: [Todo!]
+}
+
+type Todo {
+  id: ID!
+  name: String
+  createdAt: String
+  updatedAt: String
+  completedAt: String
+}
+
+input TodoInput {
+  name: String
+  completedAt: String
+}
+
+input CreateTodoRequestInput {
+  attributes: TodoInput!
+  clientMutationId: String
+}
+
+input UpdateTodoRequestInput {
+  attributes: TodoInput!
+  clientMutationId: String
+  id: ID!
+}
+
+input DeleteTodoRequestInput {
+  clientMutationId: String
+  id: ID!
+}
+
+type Mutation {
+  createTodo(input: CreateTodoRequestInput!): Todo
+  updateTodo(input: UpdateTodoRequestInput!): Todo
+  deleteTodo(input: DeleteTodoRequestInput!): Todo
+}
+
+type Query {
+  todoLists(
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): TodoListConnection!
+}

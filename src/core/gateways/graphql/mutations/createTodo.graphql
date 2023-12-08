@@ -1,0 +1,5 @@
+mutation createTodo ($input: CreateTodoRequestInput!) {
+  createTodo (input: $input) {
+    ...todoField
+  }
+}

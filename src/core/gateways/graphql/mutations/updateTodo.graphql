@@ -1,0 +1,5 @@
+mutation updateTodo ($input: UpdateTodoRequestInput!) {
+  updateTodo (input: $input) {
+    ...todoField
+  }
+}

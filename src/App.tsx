@@ -1,8 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { useStores } from "@/hooks";
 
 function App() {
+  // const { todo } = useStores();
+  // useEffect(() => {
+  //   todo.fetchTodoLists({ limit: 10 });
+  // });
   return (
     <div className="App">
       <header className="App-header">

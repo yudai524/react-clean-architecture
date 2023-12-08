@@ -1,0 +1,12 @@
+schema: src/core/gateways/schema.graphql
+documents: src/core/gateways/graphql/**/*.graphql
+generates:
+  src/core/gateways/lib/generated/sdk.ts:
+    plugins:
+      - "@graphql-codegen/typescript"
+      - "@graphql-codegen/typescript-operations"
+      - "@graphql-codegen/typescript-graphql-request"
+config:
+  scalars:
+    BigInt: string
+    ISO8601DateTime: string

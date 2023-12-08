@@ -1,0 +1,5 @@
+mutation deleteTodo ($input: DeleteTodoRequestInput!) {
+  deleteTodo (input: $input) {
+    ...todoField
+  }
+}

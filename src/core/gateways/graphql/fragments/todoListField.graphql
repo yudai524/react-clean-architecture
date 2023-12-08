@@ -1,0 +1,9 @@
+fragment todoListField on TodoList {
+  id
+  name
+  createdAt
+  updatedAt
+  list {
+    ...todoField
+  }
+}

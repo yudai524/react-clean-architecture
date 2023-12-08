@@ -1,0 +1,19 @@
+import {inject, injectable} from 'inversify'
+import {
+  I{{pascalCase name}},
+  I{{pascalCase name}}Factory,
+  {{pascalCase name}}FactoryInput,
+} from '@/types'
+import symbols from '@/symbols'
+import {{pascalCase name}}  from "@/entityVMs/{{pascalCase name}}";
+
+@injectable()
+export default class {{pascalCase name}}Factory implements I{{pascalCase name}}Factory {
+  // @inject(symbols.ICreate{{pascalCase name}}UseCase) public create{{pascalCase name}}UseCase: ICreate{{pascalCase name}}UseCase
+
+  public create(input: {{pascalCase name}}FactoryInput): I{{pascalCase name}} {
+    return new {{pascalCase name}}(input.base, {
+      create{{pascalCase name}}UseCase: this.create{{pascalCase name}}UseCase,
+    })
+  }
+}

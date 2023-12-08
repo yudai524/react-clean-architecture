@@ -1,5 +1,5 @@
 {
-  "name": "react-clean-architecture-poc3",
+  "name": "react-clean-architecture",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,17 +10,35 @@
     "@types/node": "^16.18.68",
     "@types/react": "^18.2.42",
     "@types/react-dom": "^18.2.17",
+    "graphql": "^16.8.1",
+    "graphql-request": "^6.1.0",
+    "inversify": "^6.0.2",
+    "mobx": "^6.12.0",
+    "mobx-react": "^9.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "reflect-metadata": "^0.1.14",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "@craco/craco": "^7.1.0",
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-graphql-request": "^6.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "craco-alias": "^3.0.1",
+    "prettier": "^3.1.0"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "generate": "plop",
+    "g": "npm run generate",
+    "g:graphql": "graphql-codegen"
   },
   "eslintConfig": {
     "extends": [

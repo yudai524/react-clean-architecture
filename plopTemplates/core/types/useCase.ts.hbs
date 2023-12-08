@@ -1,0 +1,13 @@
+// ============================================================
+// {{pascalCase name}}UseCase
+// ============================================================
+export type {{pascalCase name}}UseCaseInput = {
+  // TODO: Define your UseCaseInput
+}
+export type {{pascalCase name}}UseCaseOutputBase = {
+  // TODO: Define your UseCaseOutputBase
+}
+export type {{pascalCase name}}UseCaseOutput = IUseCaseOutput<{{pascalCase name}}UseCaseOutputBase>
+export interface I{{pascalCase name}}UseCase {
+  handle(input: {{pascalCase name}}UseCaseInput): Promise<{{pascalCase name}}UseCaseOutput>
+}
