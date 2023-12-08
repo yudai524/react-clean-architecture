@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import stores, { StoreContext } from "@/stores";
 import reportWebVitals from "@/utils/reportWebVitals";
-import TodoApp from "@/TodoApp";
+import App from "@/App";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <StoreContext.Provider value={stores}>
-      <TodoApp />
+      <App />
     </StoreContext.Provider>
   </React.StrictMode>,
 );
