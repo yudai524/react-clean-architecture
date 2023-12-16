@@ -1,5 +1,6 @@
 # React Clean Architecture
-React プロジェクトで Clean Architecture を利用するサンプルリポジトリです。
+React プロジェクトで Clean Architecture を利用するサンプルリポジトリです。  
+頻繁に変更が入る UI や API との通信などと疎結合にすることで、アプリケーションの変更耐性を上げ、ビジネスロジックを守る試みです。
 
 ## コンセプト
 ### 概念図
@@ -12,19 +13,55 @@ MVVM をベースに詳細部分を Clean Architecture で実装する形にな�
 #### 役割
 役割の概要は下記の通りです。
 - **UI**: ユーザーインターフェースを提供
-- **Store**: MobX の Store として、 EntityVM を格納して UI に提供する
+- **Store**: アプリケーション全体の状態管理の提供、及び EntityVM を格納して UI に提供
 - **EntityVM**: Entity を表示用に加工する
 - **Entity**: エンティティのデータを管理するシンプルなオブジェクト
 - **Gateway**: API など外部とのやりとりを行う
 - **UseCase**: ビジネスロジック
 
 ### Store
+アプリケーション全体の状態管理と、EntityVM を UI に提供する役割を持ちます。
 
-上記の概念図の VM 以降の Model 寄りの部分は、基本的に DI するようになっており、 Store は DI のコンポジションルートの役割があります。
+上記の概念図の VM 以降の Model 寄りの部分は、基本的に DI する形になっており、 Store は DI のコンポジションルートの役割があります。
+
+Store や EntityVM などの VM の部分には [MobX](https://github.com/mobxjs/mobx) を利用しています。  
+
+`src/stores` と `src/core/stores` の2つのディレクトリがあります。  
+実際にはこのレポジトリでは Create React App で出来たものに `src/core` のディレクトリを突っ込んだ形なので、あんまりどちらに置いても変わらないですが、設計時に念頭に置いたのは下記の内容になります。
+
+`src/core/stores` の方は UI に依存しない Store を格納し、  
+`src/stores` の方は UI に依存する Store ようなイメージで分けています。
+
+UI に依存しないというと、ちょっと語弊がありそうですが、例えば monorepo で React と React Native のプロジェクトがあるようなケースで、どちらでも使える Store が `src/core/stores` に入っており、React プロジェクト専用のものが `src/stores` のような形です。  
+
+このレポジトリは Create React App ベースなので React プロジェクト向けの Store が `src/stores` に置いてあり、わかりづらいですが、 `src/core` の方を React プロジェクトに依存させず、いつでも切り出せるようにしたかった意図があります。
+
+```sh
+# monorepo のケースのイメージ
+.
+├── core
+│   └── stores # UI に依存せず利用できるもの
+├── mobile
+│   └── stores # モバイル向けの Store と DI のコンポジションルート
+└── web
+    └── stores # Web 向けの Store と DI のコンポジションルート
+
+```
+
+React アプリケーション向けの Store も、core の Store も必要に応じて DI の設定で柔軟に差し替えられる想定です。
+
+Store は Singleton で DI します。
 
 ### EntityVM
+後述の Entity を表示し、Entity の操作を受け付ける VM です。  
+あんまり良い名前が思いつかなかったので EntityVM にしてありますが、VM として利用する Entity の Decorator のようなイメージです。  
+専用の Factory から生成します。
 
 ### Entity
+その名の通りエンティティです。  
+このレポジトリでは型定義で楽をするために GraphQL の API から取ってきたものをそのまま利用していますが、原理主義的に実装する場合はアプリケーション用に加工しても良いかもしれません。
+
+エラーハンドリングや UseCase の出力用のクラスもこちらに含めています。
 
 ### Gateway
 API や Storage など外部サービスとのやりとりを行います。  
@@ -36,7 +73,13 @@ API や Storage など外部サービスとのやりとりを行います。
 また、マイクロサービス化などを行って機能が別サーバーになってしまったようなケースでも優位性を発揮します。
 
 ### UseCase
+ビジネスロジックを書きます。  
+`UseCase` として型や `interaface` を定義して、`Intaractor` クラスとして実装します。  
+Todo アプリで Todo を追加する動作に対して `AddTodoInteractor` を作成するようなイメージです。  
 
+`UseCaseOutput` にエラー情報などが含まれるので UI で受け取って、メッセージを表示するなどの UI 向けのハンドリングを行います。
+
+開発時には頻繁に追加する上に、必要なファイル数が多いのでスキャフォールディングスクリプトを利用します。
 
 ## ディレクトリ構成
 
